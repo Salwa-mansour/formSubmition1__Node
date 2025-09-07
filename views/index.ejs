@@ -8,5 +8,13 @@
 </head>
 <body>
     <h1>index</h1>
+   <a href="/form">new user</a>
+<ul>
+    <% if (locals.users) {%>
+        <% locals.allUsers.forEach(user => { %>
+            <li><%= user.fullName %>  </li>
+        <% }); %>
+    <% }; %>
+</ul>
 </body>
 </html>

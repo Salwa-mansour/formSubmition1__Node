@@ -2,6 +2,8 @@
 const express = require("express")
 const app = express();
 const path = require("path");
+const { body, validationResult } = require("express-validator");
+
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -12,6 +14,7 @@ app.use(express.static(assetsPath));
 app.use(express.urlencoded({ extended: true }));
 
 //------------------
+
 //routes
 app.use('/',require(path.join(__dirname,'routers','usersRouter')));
 //------------------
@@ -23,6 +26,9 @@ app.use('/{*splat}', async (req, res) => {
 
 //how to send error page
 const PORT = process.env.PORT || 3000;
-app.listen(PORT,()=>{
-    console.log(`express app running on port ${PORT}` )
+app.listen(PORT, (error) => {
+  if (error) {
+    throw error;
+  }
+  console.log(`Express app listening on port ${PORT}!`);
 });

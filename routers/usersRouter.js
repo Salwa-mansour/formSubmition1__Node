@@ -7,5 +7,7 @@ const userController = require("../controllers/userController");
 router.get('/', (req, res) => {
     userController.getAllUsers(req,res)
 });
-
+router.get('/form',(req, res) => {
+    userController.getUsersForm(req,res)
+});
 module.exports = router;
