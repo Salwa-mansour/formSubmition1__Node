@@ -7,8 +7,11 @@
 </head>
 <body>
      <form action="/form" method="POST">
-  <label for="fullName">Full Name:</label>
-  <input placeholder="John Doe" type="text" name="fullName" id="fullName">
+      <input type="hidden" name="id" value="<%= locals.user.Id %>">
+  <label for="firstName">First Name:</label>
+  <input placeholder="John Doe" type="text" name="firstName" id="firstName" required>
+  <label for="lastName">last Name:</label>
+  <input placeholder="John Doe" type="text" name="lastName" id="lastName" required>
   <button type="submit">Submit</button>
 </form>
 </body>
