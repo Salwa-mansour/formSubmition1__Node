@@ -1,13 +1,10 @@
-const express =require('express');
-const router = express.Router();
-const path = require('path');
-const userController = require("../controllers/userController");
+// routes/usersRouter.js
+const { Router } = require("express");
+const usersController = require("../controllers/usersController");
+const usersRouter = Router();
 
+usersRouter.get("/", usersController.usersListGet);
+usersRouter.get("/create", usersController.usersCreateGet);
+usersRouter.post("/create", usersController.usersCreatePost);
 
-router.get('/', (req, res) => {
-    userController.getAllUsers(req,res)
-});
-router.get('/form',(req, res) => {
-    userController.getUsersForm(req,res)
-});
-module.exports = router;
+module.exports = usersRouter;

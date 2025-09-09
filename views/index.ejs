@@ -7,14 +7,16 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>index</h1>
-   <a href="/form">new user</a>
-<ul>
+    <h1><%= title %></h1>
+  <ul>
     <% if (locals.users) {%>
-        <% locals.allUsers.forEach(user => { %>
-            <li><%= user.fullName %>  </li>
-        <% }); %>
-    <% }; %>
-</ul>
+      <% users.forEach(user => { %>
+        <li>
+          ID: <%= user.id %>, Name: <%= user.firstName %> <%= user.lastName %>
+        </li>
+      <% }); %>
+    <% } %>
+  </ul>
+  <a href="/create">Create a user</a>
 </body>
 </html>
