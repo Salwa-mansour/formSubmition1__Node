@@ -1,28 +1,36 @@
-const usersStorage = require("../storages/usersStorage");
+//const usersStorage = require("../storages/usersStorage");
 
 // This just shows the new stuff we're adding to the existing contents
 const { body, validationResult } = require("express-validator");
+const db = require("../db/queries");
 
 
-exports.textValidatore = function(item){
+const textValidatore = function(item){
   return [body(item).trim()
     .isAlpha().withMessage(`First name ${alphaErr}`)
     .isLength({ min: 1, max: 10 }).withMessage(`First name ${lengthErr}`)]
 }
-exports.usersListGet = (req, res) => {
+
+
+
+async function usersListGet(req, res){
+
+  const usernames = await db.getAllUsernames();
+ 
+
   res.render("index", {
     title: "User list",
-    users: usersStorage.getUsers(),
+    users: usernames,
   });
-};
+}
 
-exports.usersCreateGet = (req, res) => {
+function usersCreateGet(req, res) {
   res.render("createUser", {
     title: "Create user",
   });
-};
+}
 
-exports.usersCreatePost = (req, res) => {
+async function usersCreatePost(req, res){
 
   //  const errors =  this.textValidatore(req.body.firstName);
   //  console.log(errors)
@@ -32,7 +40,13 @@ exports.usersCreatePost = (req, res) => {
   //       errors: errors.array(),
   //     });
   //   }
-  const { firstName, lastName } = req.body;
-  usersStorage.addUser({ firstName, lastName });
+    const { username } = req.body;
+  await db.insertUsername(username);
   res.redirect("/");
 };
+
+module.exports = {
+  usersListGet,
+  usersCreateGet,
+  usersCreatePost
+}
